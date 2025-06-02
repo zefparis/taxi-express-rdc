@@ -179,11 +179,13 @@ export default function DriverActiveRidePage() {
               <div className="flex space-x-2">
                 <a
                   href={`tel:${ride.client.phone}`}
+                  aria-label="Call client"
                   className="p-3 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full"
                 >
                   <FiPhone className="h-5 w-5" />
                 </a>
                 <button
+                  aria-label="Message client"
                   className="p-3 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full"
                 >
                   <FiMessageSquare className="h-5 w-5" />
@@ -306,7 +308,13 @@ export default function DriverActiveRidePage() {
             </p>
             
             <div className="mb-4">
+              <label htmlFor="cancel-reason" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Raison d'annulation
+              </label>
               <select
+                id="cancel-reason"
+                name="cancel-reason"
+                aria-label="Raison d'annulation"
                 value={cancelReason}
                 onChange={(e) => setCancelReason(e.target.value)}
                 className="w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-300"

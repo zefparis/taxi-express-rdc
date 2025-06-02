@@ -173,7 +173,11 @@ export default function DriverRegisterPage() {
             <div className={styles.progressBarContainer}>
               <div 
                 className={styles.progressBar}
-                style={{ '--progress-width': `${((currentStep - 1) / (totalSteps - 1)) * 100}%` } as React.CSSProperties}
+                ref={(el) => {
+                  if (el) {
+                    el.style.setProperty('--progress-width', `${((currentStep - 1) / (totalSteps - 1)) * 100}%`);
+                  }
+                }}
               ></div>
             </div>
           </div>
