@@ -9,7 +9,7 @@ export default function TaxiStandardPage() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold mb-4 flex items-center justify-center">
-            <FiCar className="text-primary-600 mr-2" />
+            <FaCar className="text-primary-600 mr-2" />
             Service de Taxi Standard
           </h1>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -92,7 +92,7 @@ export default function TaxiStandardPage() {
             href="tel:+243123456789" 
             className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center"
           >
-            <FiCar className="mr-2" />
+            <FaCar className="mr-2" />
             Réserver un taxi maintenant
           </a>
         </div>
