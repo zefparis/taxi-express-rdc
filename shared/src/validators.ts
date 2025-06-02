@@ -33,7 +33,22 @@ export const updateUserValidator = z.object({
 });
 
 // Driver validators
-export const driverRegistrationValidator = registerValidator.extend({
+// Create a new schema that includes all fields from registerValidator plus driver-specific fields
+export const driverRegistrationValidator = z.object({
+  // Include all fields from the base register schema
+  email: z.string().email('Adresse email invalide'),
+  password: z.string()
+    .min(8, 'Le mot de passe doit contenir au moins 8 caractères')
+    .regex(/[A-Z]/, 'Le mot de passe doit contenir au moins une lettre majuscule')
+    .regex(/[0-9]/, 'Le mot de passe doit contenir au moins un chiffre')
+    .regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir au moins un caractère spécial'),
+  confirmPassword: z.string(),
+  firstName: z.string().min(2, 'Le prénom doit contenir au moins 2 caractères'),
+  lastName: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
+  phoneNumber: z.string().regex(/^\+?[0-9]{10,15}$/, 'Numéro de téléphone invalide'),
+  role: z.nativeEnum(UserRole),
+  
+  // Driver-specific fields
   licenseNumber: z.string().min(5, 'Numéro de licence invalide'),
   licenseExpiry: z.string().refine((val) => !isNaN(Date.parse(val)), {
     message: 'Date d\'expiration invalide',
@@ -44,6 +59,9 @@ export const driverRegistrationValidator = registerValidator.extend({
   vehicleYear: z.number().int().min(2000, 'Année du véhicule invalide').max(new Date().getFullYear(), 'Année du véhicule invalide'),
   vehicleColor: z.string().min(2, 'Couleur du véhicule invalide'),
   vehiclePlateNumber: z.string().min(5, 'Numéro de plaque invalide'),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: 'Les mots de passe ne correspondent pas',
+  path: ['confirmPassword'],
 });
 
 // Ride validators
